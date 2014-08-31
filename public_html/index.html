@@ -18,14 +18,22 @@
 				<p>Copyright &copy; 2014 All Rights Reserved</p>
 			</div>
 		</aside>
-		<div class="content">
-			the content area
+		<div class="content" ng-controller="ReposController">
+			<div gridster class="repos">
+		        <ul>
+		            <li class="repo" gridster-item="repo" ng-repeat="repo in repos">
+		            	<p>{{repo.name}}</p>
+		            	<small>{{repo.description}}</small>
+		            </li>
+		        </ul>
+		    </div>
 		</div>
 	</div>
 
 	<!-- include scripts -->
+	<script src="dist/components/underscore/underscore-min.js"></script>
 	<script src="dist/components/angular/angular.min.js"></script>
-	<script src="dist/components/angular-gridster/angular-gridster.min.js"></script>
+	<script src="dist/components/angular-gridster/dist/angular-gridster.min.js"></script>
 	<script src="dist/app/rl.js"></script>
 </body>
 </html>
