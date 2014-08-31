@@ -1,0 +1,9 @@
+.container {overflow:hidden;height:100%}
+
+aside {width:230px;background:$aside;position:relative;height:inherit}
+.copyright {position:absolute;bottom:15px;left:0;right:0;color:rgba($color1, 0.1);font-size:13px;font-weight:lighter}
+.copyright img {margin-bottom:20px}
+
+.logo {margin-top:50px;display:inline-block;}
+
+.content {width:auto;float:none;overflow:hidden}
