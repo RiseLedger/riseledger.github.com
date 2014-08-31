@@ -1,0 +1,22 @@
+{
+  "name": "riseledger.github.com",
+  "version": "1.0.0",
+  "description": "Rise Ledger Personal Github Site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RiseLedger/riseledger.github.com.git"
+  },
+  "author": "Rise Ledger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RiseLedger/riseledger.github.com/issues"
+  },
+  "homepage": "https://github.com/RiseLedger/riseledger.github.com",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
+}
