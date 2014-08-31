@@ -1,6 +1,6 @@
 "use strict";
 
-var app = angular.module("Rise", []);
+var app = angular.module("Rise", [ "gridster" ]);
 
 var ui = {};
 
@@ -15,10 +15,42 @@ app.constant("Constant", {
     repos: "https://api.github.com/users/RiseLedger/repos"
 });
 
-app.controller("ReposController", [ "Repos", "$scope", function(Repos, $scope) {
+app.controller("ReposController", [ "Repos", "$scope", "Base", function(Repos, $scope, Base) {
+    $scope.colors = Base.colors;
     Repos.repos.then(function(repos) {
         $scope.repos = repos.data;
     });
+    $scope.gridsterOpts = {
+        columns: 6,
+        pushing: true,
+        floating: true,
+        width: "auto",
+        colWidth: "auto",
+        rowHeight: "match",
+        margins: [ 0, 0 ],
+        outerMargin: false,
+        isMobile: false,
+        mobileBreakPoint: 600,
+        mobileModeEnabled: true,
+        minColumns: 1,
+        minRows: 2,
+        maxRows: 100,
+        defaultSizeX: 2,
+        defaultSizeY: 1,
+        resizable: {
+            enabled: true,
+            handles: "n, e, s, w, ne, se, sw, nw",
+            start: function(event, uiWidget, $element) {},
+            resize: function(event, uiWidget, $element) {},
+            stop: function(event, uiWidget, $element) {}
+        },
+        draggable: {
+            enabled: false,
+            start: function(event, uiWidget, $element) {},
+            drag: function(event, uiWidget, $element) {},
+            stop: function(event, uiWidget, $element) {}
+        }
+    };
 } ]);
 
 app.factory("Repos", [ "$http", "$q", "Constant", function($http, $q, Constant) {
