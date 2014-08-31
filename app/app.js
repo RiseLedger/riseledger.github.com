@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('Rise', []);
+var app = angular.module('Rise', []);
