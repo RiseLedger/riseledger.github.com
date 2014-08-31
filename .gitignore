@@ -17,6 +17,12 @@ coverage
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
+# Grunt usually compiles files inside this directory
+dist/
+
+# Grunt usually preprocesses files such as coffeescript, compass... inside the .tmp directory
+.tmp/
+
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
@@ -27,7 +33,6 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
-
 
 ### Bower ###
 bower_components
@@ -43,3 +48,6 @@ bower_components
 
 #sftp configuration file
 sftp-config.json
+
+### Sass ###
+.sass-cache

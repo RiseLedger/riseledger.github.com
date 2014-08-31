@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.23"
+    "angular": "~1.2.23",
+    "angular-gridster": "~0.9.16"
   }
 }
