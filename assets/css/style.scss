@@ -1,6 +1,11 @@
 .container {overflow:hidden;height:100%}
 
 aside {width:230px;background:$aside;position:relative;height:inherit}
+.main-menu {margin-top:120px;font-size:26px}
+.main-menu li {margin-bottom:25px}
+.main-menu a {color:$color1}
+.main-menu a:hover {color:$color3}
+
 .copyright {position:absolute;bottom:15px;left:0;right:0;color:rgba($color1, 0.1);font-size:13px;font-weight:lighter}
 .copyright img {margin-bottom:20px}
 
