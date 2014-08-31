@@ -9,3 +9,17 @@ app.value("Base", {
 });
 
 app.factory("Repos", [ function() {} ]);
+
+app.directive("menu", [ function() {
+    return {
+        restrict: "E",
+        scope: true,
+        templateUrl: "dist/views/directives/menu.html",
+        link: function(scope, element, attrs) {}
+    };
+} ]);
+
+angular.module("Rise").run([ "$templateCache", function($templateCache) {
+    "use strict";
+    $templateCache.put("dist/views/directives/menu.html", "sdd");
+} ]);

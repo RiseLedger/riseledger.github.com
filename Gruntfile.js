@@ -96,6 +96,13 @@ module.exports = function(grunt) {
         src: ['*.html'],
         dest: './'
       }
+    },
+
+    ngtemplates:  {
+      Rise:        {
+        src:      ['<%= dist.views %>/*.html', '<%= dist.views %>/**/*.html'],
+        dest:     '<%= src.js %>/templates/templates.js'
+      }
     }
   });
 
@@ -106,10 +113,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-angular-templates');
 
   // register tasks
   grunt.registerTask('imgmin', ['imagemin']);
   grunt.registerTask('cp', ['copy']);
-  grunt.registerTask('default', ['sass', 'uglify', 'htmlmin:dist', 'htmlmin:main']);
+  grunt.registerTask('default', ['sass', 'htmlmin:dist', 'ngtemplates', 'uglify', 'htmlmin:main']);
 
 };
