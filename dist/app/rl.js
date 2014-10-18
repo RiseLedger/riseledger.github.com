@@ -5,64 +5,115 @@ var app = angular.module("Rise", [ "gridster" ]);
 var ui = {};
 
 app.value("Base", {
-    colors: [ "#00c6ff", "#fff600", "#ff7800", "#5ac71e", "#ff0036", "#002aff", "#f000ff", "#00ff9c" ],
+    colors: [ "#00c6ff", "#fff600", "#ff7800", "#5ac71e", "#ff0036", "#002aff", "#f000ff", "#00ff9c", "#acacac", "#e4ff00", "#ff00a2" ],
     exclude: {
         repo: 23490728
-    }
+    },
+    gridsterOpts: {
+        margins: [ 0, 0 ],
+        outerMargin: false,
+        mobileBreakPoint: 1170
+    },
+    items: [ {
+        sizeX: 2,
+        sizeY: 1,
+        row: 0,
+        col: 0
+    }, {
+        sizeX: 2,
+        sizeY: 2,
+        row: 0,
+        col: 2
+    }, {
+        sizeX: 1,
+        sizeY: 1,
+        row: 0,
+        col: 4
+    }, {
+        sizeX: 1,
+        sizeY: 2,
+        row: 0,
+        col: 5
+    }, {
+        sizeX: 2,
+        sizeY: 1,
+        row: 1,
+        col: 0
+    }, {
+        sizeX: 1,
+        sizeY: 1,
+        row: 1,
+        col: 4
+    }, {
+        sizeX: 1,
+        sizeY: 1,
+        row: 2,
+        col: 0
+    }, {
+        sizeX: 2,
+        sizeY: 1,
+        row: 2,
+        col: 1
+    }, {
+        sizeX: 1,
+        sizeY: 1,
+        row: 2,
+        col: 3
+    }, {
+        sizeX: 1,
+        sizeY: 1,
+        row: 2,
+        col: 4
+    }, {
+        sizeX: 1,
+        sizeY: 1,
+        row: 2,
+        col: 5
+    } ]
 });
 
 app.constant("Constant", {
-    repos: "https://api.github.com/users/RiseLedger/repos"
+    repos: "https://api.github.com/users/RiseLedger/repos",
+    path: {
+        img: "/dist/assets/images"
+    }
 });
 
-app.controller("ReposController", [ "Repos", "$scope", "Base", function(Repos, $scope, Base) {
+app.controller("ReposController", [ "Repos", "$scope", "Base", "Constant", function(Repos, $scope, Base, Constant) {
     $scope.colors = Base.colors;
+    $scope.gridsterOpts = Base.gridsterOpts;
+    $scope.items = Base.items;
     Repos.repos.then(function(repos) {
         $scope.repos = repos.data;
-    });
-    $scope.gridsterOpts = {
-        columns: 6,
-        pushing: true,
-        floating: true,
-        width: "auto",
-        colWidth: "auto",
-        rowHeight: "match",
-        margins: [ 0, 0 ],
-        outerMargin: false,
-        isMobile: false,
-        mobileBreakPoint: 600,
-        mobileModeEnabled: true,
-        minColumns: 1,
-        minRows: 2,
-        maxRows: 100,
-        defaultSizeX: 2,
-        defaultSizeY: 1,
-        resizable: {
-            enabled: true,
-            handles: "n, e, s, w, ne, se, sw, nw",
-            start: function(event, uiWidget, $element) {},
-            resize: function(event, uiWidget, $element) {},
-            stop: function(event, uiWidget, $element) {}
-        },
-        draggable: {
-            enabled: false,
-            start: function(event, uiWidget, $element) {},
-            drag: function(event, uiWidget, $element) {},
-            stop: function(event, uiWidget, $element) {}
+        for (var i = $scope.repos.length; i < $scope.items.length; i++) {
+            $scope.repos[i] = {
+                empty: true,
+                title: "Coming soon",
+                image: Constant.path.img + "/coming-soon.png",
+                color: "#000000"
+            };
         }
-    };
+    });
 } ]);
 
 app.factory("Repos", [ "$http", "$q", "Constant", function($http, $q, Constant) {
     var q = $q.defer();
     var repos = localStorage.getItem("com.riseledger.repos");
-    if (repos) {
+    var expireTime = localStorage.getItem("com.riseledger.repos.expire") || 0;
+    var isExpired = expireTime < new Date().getTime();
+    if (!isExpired) {
         q.resolve(JSON.parse(repos));
     } else {
         $http.get(Constant.repos).then(function(data) {
             localStorage.setItem("com.riseledger.repos", JSON.stringify(data));
+            localStorage.setItem("com.riseledger.repos.expire", getExpireDate());
             q.resolve(data);
         });
+    }
+    function getExpireDate() {
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        return tomorrow.getTime();
     }
     return {
         repos: q.promise

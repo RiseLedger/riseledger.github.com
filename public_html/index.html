@@ -21,7 +21,7 @@
 		<div class="content" ng-controller="ReposController">
 			<div gridster="gridsterOpts" class="repos">
 		        <ul>
-		            <li ng-style="{background:colors[$index]}" class="repo" gridster-item="repo" ng-repeat="repo in repos">
+		            <li ng-style="{background:colors[$index]}" class="repo" gridster-item="items[$index]" ng-repeat="repo in repos">
 		            	<p>{{repo.name}}</p>
 		            	<small>{{repo.description}}</small>
 		            </li>
