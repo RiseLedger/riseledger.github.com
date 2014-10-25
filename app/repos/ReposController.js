@@ -9,10 +9,7 @@ app.controller('ReposController', ['Repos', '$scope', 'Base', 'Constant', functi
 
         for(var i = $scope.repos.length; i < $scope.items.length; i++) {
             $scope.repos[i] = {
-                empty : true,
-                title : 'Coming soon',
-                image : Constant.path.img + '/coming-soon.png',
-                color : '#000000'
+                empty : true
             }
         }
 	});

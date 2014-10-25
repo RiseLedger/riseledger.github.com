@@ -21,9 +21,12 @@
 		<div class="content" ng-controller="ReposController">
 			<div gridster="gridsterOpts" class="repos">
 		        <ul>
-		            <li ng-style="{background:colors[$index]}" class="repo" gridster-item="items[$index]" ng-repeat="repo in repos">
-		            	<p>{{repo.name}}</p>
-		            	<small>{{repo.description}}</small>
+		            <li ng-class="{'is-empty-repo' : repo.empty}" ng-style="{background:colors[$index]}" class="repo" gridster-item="items[$index]" ng-repeat="repo in repos">
+		            	<div class="empty-repo" ng-if="repo.empty"><span class="repo-text">Coming Soon</span></div>
+		            	<div ng-hide="repo.empty">
+		            		<p>{{repo.name}}</p>
+		            		<small>{{repo.description}}</small>
+		            	</div>
 		            </li>
 		        </ul>
 		    </div>

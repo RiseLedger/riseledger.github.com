@@ -11,7 +11,7 @@ app.directive('menu', ['Repos', 'Base', function (Repos, Base) {
 					return Base.exclude.repo !== item.id;
 				});
 
-				scope.langs = _.pluck(repos, 'language')
+				scope.langs = _.compact( _.pluck(repos, 'language') );
 			})
 		}
 	};

@@ -87,10 +87,7 @@ app.controller("ReposController", [ "Repos", "$scope", "Base", "Constant", funct
         $scope.repos = repos.data;
         for (var i = $scope.repos.length; i < $scope.items.length; i++) {
             $scope.repos[i] = {
-                empty: true,
-                title: "Coming soon",
-                image: Constant.path.img + "/coming-soon.png",
-                color: "#000000"
+                empty: true
             };
         }
     });
@@ -131,7 +128,7 @@ app.directive("menu", [ "Repos", "Base", function(Repos, Base) {
                 repos = repos.filter(function(item) {
                     return Base.exclude.repo !== item.id;
                 });
-                scope.langs = _.pluck(repos, "language");
+                scope.langs = _.compact(_.pluck(repos, "language"));
             });
         }
     };
