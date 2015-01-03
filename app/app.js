@@ -1,3 +1,3 @@
 'use strict';
 
-var app = angular.module('Rise', ['gridster']);
+var app = angular.module('Rise', []);

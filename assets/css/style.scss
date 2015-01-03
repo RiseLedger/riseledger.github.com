@@ -1,7 +1,7 @@
 .container {overflow:hidden;height:100%}
 
 aside {width:230px;background:$color0;position:relative;height:inherit}
-.main-menu {margin-top:120px;font-size:26px}
+.main-menu {margin-top:120px;font-size:26px;font-weight: lighter;}
 .main-menu li {margin-bottom:25px;list-style:none}
 .main-menu a {color:$color1}
 .main-menu a:hover {color:$color3}
@@ -13,8 +13,7 @@ aside {width:230px;background:$color0;position:relative;height:inherit}
 
 .content {width:auto;float:none;overflow:hidden;}
 .repos {color:$color2}
-.repos .repo {padding:20px 5px}
-.empty-repo {overflow:hidden;position:absolute;top:0;right:0;bottom:0;left:0;background:#000 url(../images/coming-soon.png) no-repeat center center;text-align:center;color:$color1;font-size:28px;font-weight:bold;}
+.repos .repo a {display:block;padding:20px 5px;color:$color2;text-decoration:none}
 .repo-text {top:50%;left:0;right:0;margin:-15px auto;position:absolute}
 
 @media(max-width:1400px) {
