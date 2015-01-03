@@ -12,7 +12,12 @@ app.directive('menu', ['Repos', 'Base', function (Repos, Base) {
 				});
 
 				scope.langs = _.compact( _.pluck(repos, 'language') );
-			})
+
+				scope.displayLang = function (lang) {
+					console.log(lang);
+					console.log(repos);
+				}
+			});
 		}
 	};
 }]);

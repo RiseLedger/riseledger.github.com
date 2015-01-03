@@ -129,6 +129,10 @@ app.directive("menu", [ "Repos", "Base", function(Repos, Base) {
                     return Base.exclude.repo !== item.id;
                 });
                 scope.langs = _.compact(_.pluck(repos, "language"));
+                scope.displayLang = function(lang) {
+                    console.log(lang);
+                    console.log(repos);
+                };
             });
         }
     };
@@ -136,5 +140,5 @@ app.directive("menu", [ "Repos", "Base", function(Repos, Base) {
 
 angular.module("Rise").run([ "$templateCache", function($templateCache) {
     "use strict";
-    $templateCache.put("dist/views/directives/menu.html", '<ul class="main-menu"><li ng-repeat="lang in langs track by $index"><a href>{{lang}}</a></li></ul>');
+    $templateCache.put("dist/views/directives/menu.html", '<ul class="main-menu"><li ng-repeat="lang in langs track by $index"><a ng-click="displayLang(lang)" ng-model="lang" href>{{lang}}</a></li></ul>');
 } ]);
