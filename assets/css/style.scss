@@ -13,7 +13,7 @@ aside {width:230px;background:$color0;position:relative;height:inherit}
 
 .content {width:auto;float:none;overflow:hidden;}
 .repos {color:$color2}
-.repos .repo a {display:block;padding:20px 5px;color:$color2;text-decoration:none}
+.repos .repo a {display:block;padding:20px 5px;color:$color2;text-decoration:none;text-align:center}
 .repo-text {top:50%;left:0;right:0;margin:-15px auto;position:absolute}
 
 @media(max-width:1400px) {

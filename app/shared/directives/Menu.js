@@ -1,4 +1,4 @@
-app.directive('menu', ['Repos', 'Base', function (Repos, Base) {
+app.directive('menu', ['Repos', 'Base', '$rootScope', function (Repos, Base, $rootScope) {
 
 	return {
 		restrict : 'E',
@@ -14,8 +14,7 @@ app.directive('menu', ['Repos', 'Base', function (Repos, Base) {
 				scope.langs = _.compact( _.pluck(repos, 'language') );
 
 				scope.displayLang = function (lang) {
-					console.log(lang);
-					console.log(repos);
+					$rootScope.$broadcast('repos:filter', lang);
 				}
 			});
 		}

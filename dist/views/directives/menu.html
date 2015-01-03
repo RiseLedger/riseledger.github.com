@@ -1,1 +1,1 @@
-<ul class="main-menu"><li ng-repeat="lang in langs track by $index"><a ng-click="displayLang(lang)" ng-model="lang" href>{{lang}}</a></li></ul>
+<ul class="main-menu"><li><a ng-click="displayLang('')" href>All</a></li><li ng-repeat="lang in langs track by $index"><a ng-click="displayLang(lang)" ng-model="lang" href>{{lang}}</a></li></ul>

@@ -7,7 +7,7 @@ var ui = {};
 app.value("Base", {
     colors: [ "#00c6ff", "#fff600", "#ff7800", "#5ac71e", "#ff0036", "#002aff", "#f000ff", "#00ff9c", "#acacac", "#e4ff00", "#ff00a2" ],
     exclude: {
-        repo: 23490728
+        repo: ""
     }
 });
 
@@ -19,9 +19,16 @@ app.constant("Constant", {
 });
 
 app.controller("ReposController", [ "Repos", "$scope", "Base", "Constant", function(Repos, $scope, Base, Constant) {
+    var reposCollection;
     $scope.colors = Base.colors;
     Repos.repos.then(function(repos) {
+        reposCollection = repos.data;
         $scope.repos = repos.data;
+    });
+    $scope.$on("repos:filter", function(evt, lang) {
+        $scope.repos = _.filter(reposCollection, function(repo) {
+            if (lang) return repo.language === lang; else return repo;
+        });
     });
 } ]);
 
@@ -49,7 +56,7 @@ app.factory("Repos", [ "$http", "$q", "Constant", function($http, $q, Constant) 
     };
 } ]);
 
-app.directive("menu", [ "Repos", "Base", function(Repos, Base) {
+app.directive("menu", [ "Repos", "Base", "$rootScope", function(Repos, Base, $rootScope) {
     return {
         restrict: "E",
         scope: true,
@@ -62,8 +69,7 @@ app.directive("menu", [ "Repos", "Base", function(Repos, Base) {
                 });
                 scope.langs = _.compact(_.pluck(repos, "language"));
                 scope.displayLang = function(lang) {
-                    console.log(lang);
-                    console.log(repos);
+                    $rootScope.$broadcast("repos:filter", lang);
                 };
             });
         }
@@ -72,5 +78,5 @@ app.directive("menu", [ "Repos", "Base", function(Repos, Base) {
 
 angular.module("Rise").run([ "$templateCache", function($templateCache) {
     "use strict";
-    $templateCache.put("dist/views/directives/menu.html", '<ul class="main-menu"><li ng-repeat="lang in langs track by $index"><a ng-click="displayLang(lang)" ng-model="lang" href>{{lang}}</a></li></ul>');
+    $templateCache.put("dist/views/directives/menu.html", '<ul class="main-menu"><li><a ng-click="displayLang(\'\')" href>All</a></li><li ng-repeat="lang in langs track by $index"><a ng-click="displayLang(lang)" ng-model="lang" href>{{lang}}</a></li></ul>');
 } ]);
