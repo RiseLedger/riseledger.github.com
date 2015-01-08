@@ -3,8 +3,8 @@
 aside {width:230px;background:$color0;position:relative;height:inherit}
 .main-menu {margin-top:120px;font-size:26px;font-weight: lighter;}
 .main-menu li {margin-bottom:25px;list-style:none}
-.main-menu a {color:$color1}
-.main-menu a:hover {color:$color3}
+.main-menu a {color:$menu-default}
+.main-menu a:hover {color:$color1}
 
 .copyright {position:absolute;bottom:15px;left:0;right:0;color:rgba($color1, 0.1);font-size:13px;font-weight:lighter}
 .copyright img {margin-bottom:20px}
@@ -13,7 +13,7 @@ aside {width:230px;background:$color0;position:relative;height:inherit}
 
 .content {width:auto;float:none;overflow:hidden;}
 .repos {color:$color2}
-.repos .repo a {display:block;padding:20px 5px;color:$color2;text-decoration:none;text-align:center}
+.repos .repo a {display:block;padding:20px 5px;color:$color1;text-decoration:none;text-align:center}
 .repo-text {top:50%;left:0;right:0;margin:-15px auto;position:absolute}
 
 @media(max-width:1400px) {
