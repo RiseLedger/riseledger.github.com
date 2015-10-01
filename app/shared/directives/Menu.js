@@ -6,7 +6,6 @@ app.directive('menu', ['Repos', 'Base', '$rootScope', function (Repos, Base, $ro
 		templateUrl : 'dist/views/directives/menu.html',
 		link : function (scope, element, attrs) {
 			Repos.repos.then(function (repos) {
-				var repos = repos.data;
 				repos = repos.filter(function (item) {
 					return Base.exclude.repo !== item.id;
 				});
@@ -15,7 +14,7 @@ app.directive('menu', ['Repos', 'Base', '$rootScope', function (Repos, Base, $ro
 
 				scope.displayLang = function (lang) {
 					$rootScope.$broadcast('repos:filter', lang);
-				}
+				};
 			});
 		}
 	};

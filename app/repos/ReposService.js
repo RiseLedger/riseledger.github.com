@@ -9,9 +9,10 @@ app.factory('Repos', ['$http', '$q', 'Constant', function ($http, $q, Constant) 
 	}
 	else {
 		$http.get(Constant.repos).then(function (data) {
-			localStorage.setItem('com.riseledger.repos', JSON.stringify(data));
+			var ownerRepos = filterByOwner(data.data);
+			localStorage.setItem('com.riseledger.repos', JSON.stringify(ownerRepos));
 			localStorage.setItem('com.riseledger.repos.expire', getExpireDate());
-			q.resolve(data);
+			q.resolve(ownerRepos);
 		});
 	}
 
@@ -19,6 +20,12 @@ app.factory('Repos', ['$http', '$q', 'Constant', function ($http, $q, Constant) 
 		var tomorrow = new Date();
 		tomorrow.setDate(tomorrow.getDate() + 1);
 		return tomorrow.getTime();
+	}
+
+	function filterByOwner(repos) {
+		return repos.filter(function (repo) {
+			return !repo.fork;
+		});
 	}
 
 	return {

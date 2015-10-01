@@ -4,8 +4,8 @@ app.controller('ReposController', ['Repos', '$scope', 'Base', 'Constant', functi
     $scope.colors = Base.colors;
 
 	Repos.repos.then(function (repos) {
-        reposCollection = repos.data;
-        $scope.repos = repos.data;
+        reposCollection = repos;
+        $scope.repos = repos;
 	});
 
     $scope.$on('repos:filter', function (evt, lang) {

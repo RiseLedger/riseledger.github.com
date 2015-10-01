@@ -22,8 +22,8 @@ app.controller("ReposController", [ "Repos", "$scope", "Base", "Constant", funct
     var reposCollection;
     $scope.colors = Base.colors;
     Repos.repos.then(function(repos) {
-        reposCollection = repos.data;
-        $scope.repos = repos.data;
+        reposCollection = repos;
+        $scope.repos = repos;
     });
     $scope.$on("repos:filter", function(evt, lang) {
         $scope.repos = _.filter(reposCollection, function(repo) {
@@ -41,15 +41,21 @@ app.factory("Repos", [ "$http", "$q", "Constant", function($http, $q, Constant) 
         q.resolve(JSON.parse(repos));
     } else {
         $http.get(Constant.repos).then(function(data) {
-            localStorage.setItem("com.riseledger.repos", JSON.stringify(data));
+            var ownerRepos = filterByOwner(data.data);
+            localStorage.setItem("com.riseledger.repos", JSON.stringify(ownerRepos));
             localStorage.setItem("com.riseledger.repos.expire", getExpireDate());
-            q.resolve(data);
+            q.resolve(ownerRepos);
         });
     }
     function getExpireDate() {
         var tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
         return tomorrow.getTime();
+    }
+    function filterByOwner(repos) {
+        return repos.filter(function(repo) {
+            return !repo.fork;
+        });
     }
     return {
         repos: q.promise
@@ -63,7 +69,6 @@ app.directive("menu", [ "Repos", "Base", "$rootScope", function(Repos, Base, $ro
         templateUrl: "dist/views/directives/menu.html",
         link: function(scope, element, attrs) {
             Repos.repos.then(function(repos) {
-                var repos = repos.data;
                 repos = repos.filter(function(item) {
                     return Base.exclude.repo !== item.id;
                 });
